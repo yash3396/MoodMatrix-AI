@@ -114,7 +114,7 @@ const AuthForm: React.FC<AuthFormProps> = ({ mode, setMode }) => {
                     value={password}
                     onChange={(e) => setPassword(e.target.value)}
                     required
-                    minLength={6}
+                    minLength={isLogin ? 6 : 8}
                     className="w-full px-4 py-2 border border-slate-300 dark:border-slate-600 rounded-lg bg-transparent focus:ring-2 focus:ring-brand-500"
                 />
                 <button

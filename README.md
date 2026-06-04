@@ -1,165 +1,147 @@
-<div align="center">
+# MoodMatrix AI - Mental Wellness Journaling Platform
 
-# Aura – AI Diary & Emotional Insights
+[![IntelliAI Arena 2026](https://img.shields.io/badge/IntelliAI-Arena%202026-blue)](https://intelliarena.com)
+[![License: MIT](https://img.shields.io/badge/License-MIT-yellow.svg)](https://opensource.org/licenses/MIT)
 
-Futuristic, privacy‑minded journaling. Type or speak entries, get instant emotional + sentiment insights, track mood trends, and receive gentle, personalized self‑care suggestions.
+An AI-powered mental wellness journal that transforms daily reflections into actionable emotional insights.
 
-## 📸 App Previews
-Below are screenshots of key pages. Images are located in the `Pics` folder and named after their respective pages:
+## 🌟 Features
 
-| Home | Dashboard | Journal | Insights | Community Feed | Settings | Sign In | Sign Up |
-|------|-----------|---------|----------|----------------|----------|---------|---------|
-| ![Home](Pics/Home%20(2).png) | ![Dashboard](Pics/dashboard.png) | ![Journal](Pics/Journal.png) | ![Insights](Pics/Insights.png) | ![Community Feed](Pics/communitywellnessfeed.png) | ![Settings](Pics/settings.png) | ![Sign In](Pics/Sign%20in.png) | ![Sign Up](Pics/Sign%20up.png) |
+- 🤖 **AI Sentiment Analysis** - Google Gemini 2.5 Flash powered emotional intelligence
+- 📊 **Mood Tracking** - Interactive charts and calendar heatmap
+- 💡 **Personalized Recommendations** - AI-generated self-care suggestions
+- 🔒 **Privacy-First** - End-to-end encryption, your data stays yours
+- 📱 **Offline Support** - Write anywhere, sync automatically
+- 🌍 **Multi-Language** - English, Hindi, Bengali, Tamil, Telugu, Malayalam
+- 🎨 **Aurora Night Theme** - Beautiful dark UI with glassmorphism
 
-</div>
+## 🚀 Quick Start
 
-## ✨ Core Features
-* Rich Text + Voice: Lexical editor with formatting (bold / italic / underline) and live speech‑to‑text (Web Speech API). 
-* AI Emotional Analysis: Gemini-powered insight & recommendations layer (pluggable abstraction in `frontend/services/geminiService.ts`).
-* Mood Intelligence: Calendar heatmap + charts (Recharts + d3-scale) to visualize sentiment over time.
-* Titles & Tags: Organize entries with quick searchable metadata (title, tags pipeline persisted via backend).
-* Therapist Mode: Generate anonymized shareable summaries / PDF (`utils/pdfGenerator.ts`).
-* Community Feed (Optional): Anonymous sharing with on‑the‑fly sentiment scoring (classic sentiment lib) + admin purge route.
-* Offline Resilience: Local queue / caching logic (IndexedDB) to avoid data loss while offline.
-* Data Control: Export or delete all personal data (user endpoints) + secure purge key for community moderation.
-* Aesthetic Layer: Plasma gradients, noise overlays, neon glows, motion (Framer Motion) for an ambient UI.
-* Accessibility & Safety: Rate limiting, sanitization, CSP, Helmet, input size limits.
+### Prerequisites
+- Node.js 18+ and npm
+- MongoDB database
+- Google Gemini API key ([Get one here](https://aistudio.google.com/))
 
-## 🛠️ Tech Stack
-Frontend: React 19 · Vite · TypeScript · Tailwind CSS · Lexical · Framer Motion · Recharts · i18next
-Backend: Node.js · Express · MongoDB · Mongoose
-AI: Gemini API (@google/genai)
-Security: Helmet, express-rate-limit, express-mongo-sanitize, xss-clean, JWT auth
-Voice: Web Speech API (secure context required – HTTPS or localhost)
+### Installation
 
-## 📁 Structure
-```
-backend/
-  src/
-    server.js
-    controllers/
-    middleware/
-    models/
-    routes/
-frontend/
-  components/
-  pages/
-  hooks/
-  services/
-  utils/
-  context/
-```
-
-## 🤖 Model Folder
-
-The `model` directory contains assets for advanced emotion and sentiment analysis:
-
-- `distilbert_models.ipynb`: Jupyter notebook that trains a multi-label emotion classification model using DistilBERT (HuggingFace Transformers, PyTorch). It processes journal entries, tokenizes them, and predicts multiple emotions per entry. The model uses BCEWithLogitsLoss and AdamW optimizer, and is evaluated with F1 score and classification metrics. The notebook demonstrates data cleaning, training, and evaluation workflows for robust emotion detection.
-
-- `best_model.pt`: The best performing PyTorch model checkpoint from the notebook, suitable for advanced sentiment and emotion analysis. While not directly integrated into the app yet, it can be used to power richer insights and emotion detection features in future updates.
-
-- `emotion_classification_model_complete.pt`: A finalized version of the emotion classification model, ready for deployment or further experimentation.
-
-These models enable nuanced emotion analysis beyond basic sentiment scoring, and can be integrated into backend or AI services to provide deeper emotional insights for diary entries.
-
-## 🔐 Environment Variables (Backend `.env`)
-Required:
-```
-MONGO_URI=mongodb+srv://...
-JWT_SECRET=supersecretlongrandom
-GEMINI_API_KEY=your_gemini_key_here
-ALLOWED_ORIGINS=https://yourfrontend.app,https://staging.app (optional, comma separated)
-COMMUNITY_PURGE_KEY=some-long-random-admin-key
-PORT=5000            # optional
-NODE_ENV=development # or production
-```
-
-Frontend (optional `.env` in `frontend/` if you proxy or need Vite vars):
-```
-VITE_API_BASE=http://localhost:5000
-VITE_GEMINI_MODEL=gemini-1.5-flash
-```
-
-## 🚀 Local Development
+1. **Clone the repository**
 ```bash
-git clone https://github.com/NikhilKartha5/ai-journal.git
-cd ai-journal
+git clone https://github.com/yourusername/moodmatrix-ai.git
+cd moodmatrix-ai
+```
 
-# Backend
+2. **Backend Setup**
+```bash
 cd backend
 npm install
-cp .env.example .env  # (create and fill if example provided; otherwise create manually)
-npm run dev            # nodemon
 
-# In a second terminal – Frontend
+# Copy and configure environment variables
+cp .env.example .env
+# Edit .env with your MongoDB URI, JWT secret, and Gemini API key
+```
+
+3. **Frontend Setup**
+```bash
 cd ../frontend
 npm install
+
+# Copy and configure environment variables
+cp .env.example .env
+# Edit .env with your Gemini API key
+```
+
+4. **Start Development Servers**
+
+Terminal 1 (Backend):
+```bash
+cd backend
+npm start
+```
+
+Terminal 2 (Frontend):
+```bash
+cd frontend
 npm run dev
 ```
-Open: http://localhost:5173
 
-### HTTPS & Microphone
-Browser speech recognition requires a secure context. localhost / 127.0.0.1 / ::1 count as secure. For LAN / public testing, use HTTPS (self-signed cert or a reverse proxy like Caddy / nginx / vite preview behind mkcert). 
+5. **Open the app**
+- Frontend: http://localhost:5173
+- Backend API: http://localhost:5000
 
-## 🧪 Basic Verification Checklist
-* Backend starts, logs MongoDB connected.
-* Register → Login → Create diary entry with title + tags.
-* Start mic, dictate text, formatting works.
-* Entry saved and appears in mood charts.
-* Community feed loads; purge (admin only) works when sending `x-purge-key` header.
+## 📦 Environment Variables
 
-## 🔄 API Overview (Brief)
-| Endpoint | Method | Purpose |
-|----------|--------|---------|
-| /api/auth/register | POST | Create user |
-| /api/auth/login | POST | Authenticate (receives JWT) |
-| /api/diary | GET/POST | List / create diary entries |
-| /api/diary/:id | PUT/DELETE | Update or delete entry |
-| /api/community | GET/POST | Feed list / create post |
-| /api/community | DELETE | Purge all posts (requires `x-purge-key`) |
-| /api/user/export | GET | Download user data |
-| /api/user/delete | DELETE | Delete account + data |
+### Backend (.env)
+```env
+MONGO_URI=your_mongodb_connection_string
+JWT_SECRET=your_jwt_secret
+PORT=5000
+GEMINI_API_KEY=your_gemini_api_key
+ALLOWED_ORIGINS=http://localhost:5173,http://127.0.0.1:5173
+```
 
-JWT is sent via `Authorization: Bearer <token>` header.
+### Frontend (.env)
+```env
+VITE_GEMINI_API_KEY=your_gemini_api_key
+```
 
-## 🛡️ Security Notes
-* CORS restricted via `ALLOWED_ORIGINS`.
-* Rate limiting on auth routes (50 / 15 min window default).
-* Helmet + custom Content-Security-Policy.
-* Mongo & XSS sanitization middleware.
-* Short JSON body size limit (64kb) for safety.
-* Purge key: Treat `COMMUNITY_PURGE_KEY` like a secret (rotate periodically).
+## 🏗️ Tech Stack
 
-## 📊 Data & Sentiment
-* Diary sentiment & mood trends aggregate simple sentiment scoring now; can be upgraded to more nuanced emotion classification.
-* Rich text currently stored with plain text content for analysis (extend to persist Lexical JSON if needed).
+**Frontend:**
+- React 19 + TypeScript
+- Tailwind CSS (Custom Aurora Night theme)
+- Framer Motion (Animations)
+- Recharts (Data visualization)
+- IndexedDB (Offline storage)
+- i18next (Internationalization)
 
-## 🧱 Deployment Tips
-1. Build frontend: `npm run build` inside `frontend` (outputs `dist/`).
-2. Serve static (optionally) from a CDN or separate host; point `VITE_API_BASE` to backend URL.
-3. Provision MongoDB (Atlas or managed instance).
-4. Set all env vars on server/platform (Render, Railway, Fly.io, Docker, etc.).
-5. Run backend with a process manager (PM2 / systemd / platform runtime) `node src/server.js`.
-6. Enable HTTPS: platform certs or reverse proxy (Caddy / Nginx / Cloudflare) to preserve mic functionality.
+**Backend:**
+- Node.js + Express
+- MongoDB + Mongoose
+- JWT Authentication
+- Helmet.js (Security)
+- Express Rate Limit
 
+**AI:**
+- Google Gemini 2.5 Flash API
 
+## 📱 Deployment
 
-## 🧩 Roadmap (Ideas)
-* Persist full rich text (Lexical JSON) + advanced formatting (lists, headings).
-* Tag & title search / filtering UI enhancements.
-* Emotion classification with fine‑tuned model.
-* Role-based admin instead of purge key.
-* Mobile PWA install + offline sync improvements.
+### Frontend (Vercel)
+1. Push code to GitHub
+2. Import project on [Vercel](https://vercel.com)
+3. Add environment variable: `VITE_GEMINI_API_KEY`
+4. Deploy!
+
+### Backend (Railway/Render)
+1. Push code to GitHub
+2. Create new service on [Railway](https://railway.app) or [Render](https://render.com)
+3. Add environment variables (MongoDB, JWT, Gemini API)
+4. Deploy!
 
 ## 🤝 Contributing
-Issues & PRs welcome. Please describe context / intention; keep commits focused.
+
+Contributions are welcome! Please read our contributing guidelines first.
 
 ## 📄 License
-MIT – see `LICENSE` file for full text.
 
-## 👤 Author
-Nikhil N Kartha
+This project is licensed under the MIT License.
+
+## 🏆 Built For
+
+**IntelliAI Arena 2026**
+
+### Powered By
+- 🏛️ Acropolis - Enlightening Wisdom
+- 🤖 AiML
+- 🎓 Major League Hacking (MLH)
+- 🧠 AI Nexus
+
+## 📞 Contact
+
+**Project Lead:** [Your Name]  
+**Email:** [Your Email]  
+**GitHub:** [Your GitHub Profile]
 
 ---
-Feel free to fork and tailor Aura to your own wellness workflow.
 
+Made with ❤️ for mental wellness

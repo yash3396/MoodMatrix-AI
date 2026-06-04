@@ -6,12 +6,14 @@ import rateLimit from 'express-rate-limit';
 import mongoSanitize from 'express-mongo-sanitize';
 import xss from 'xss-clean';
 import dotenv from 'dotenv';
+
+// Load environment variables FIRST before any other imports
+dotenv.config();
+
 import authRoutes from './routes/auth.js';
 import diaryRoutes from './routes/diary.js';
 import userRoutes from './routes/user.js';
 import communityRoutes from './routes/community.js';
-
-dotenv.config();
 
 const app = express();
 

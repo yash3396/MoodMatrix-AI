@@ -5,8 +5,8 @@ export const createEntry = async (req, res) => {
     const { date, mood, content, analysis, title, tags } = req.body;
     const entry = new DiaryEntry({
       user: req.userId,
-      date,
-      mood,
+      date: date ? new Date(date) : new Date(),
+      mood: mood != null ? String(mood) : undefined,
       title: title?.slice(0, 240),
       tags: Array.isArray(tags) ? tags.slice(0, 12).map(t => String(t).slice(0,32)) : [],
       content,
@@ -15,6 +15,7 @@ export const createEntry = async (req, res) => {
     await entry.save();
     res.status(201).json(entry);
   } catch (err) {
+    console.error('Create diary error:', err);
     res.status(500).json({ message: 'Server error' });
   }
 };

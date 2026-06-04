@@ -78,22 +78,59 @@ export const ChevronDownIcon: React.FC<{className?: string}> = ({ className }) =
 );
 
 export const LogoIcon: React.FC<{className?: string}> = ({ className }) => (
-    <svg className={`h-8 w-8 ${className}`} viewBox="0 0 64 64" fill="none" xmlns="http://www.w3.org/2000/svg" aria-label="AI Diary Logo">
+    <svg className={`h-8 w-8 ${className}`} viewBox="0 0 64 64" fill="none" xmlns="http://www.w3.org/2000/svg" aria-label="MoodMatrix AI Logo">
         <defs>
             <linearGradient id="logoGradient" x1="8" y1="8" x2="56" y2="56" gradientUnits="userSpaceOnUse">
-                <stop stopColor="#a855f7" />
-                <stop offset="0.5" stopColor="#ec4899" />
-                <stop offset="1" stopColor="#f59e0b" />
+                <stop stopColor="#667eea" />
+                <stop offset="0.33" stopColor="#9333ea" />
+                <stop offset="0.66" stopColor="#ec4899" />
+                <stop offset="1" stopColor="#f093fb" />
             </linearGradient>
-            <radialGradient id="glow" cx="0" cy="0" r="1" gradientUnits="userSpaceOnUse" gradientTransform="translate(28 24) rotate(45) scale(32)">
-                <stop stopColor="#f5d0fe" stopOpacity="0.9" />
-                <stop offset="1" stopColor="#a855f7" stopOpacity="0" />
+            <radialGradient id="glow" cx="32" cy="32" r="30" gradientUnits="userSpaceOnUse">
+                <stop stopColor="#9333ea" stopOpacity="0.3" />
+                <stop offset="0.5" stopColor="#ec4899" stopOpacity="0.2" />
+                <stop offset="1" stopColor="#667eea" stopOpacity="0" />
             </radialGradient>
+            <filter id="logoGlow">
+                <feGaussianBlur stdDeviation="2" result="coloredBlur"/>
+                <feMerge>
+                    <feMergeNode in="coloredBlur"/>
+                    <feMergeNode in="SourceGraphic"/>
+                </feMerge>
+            </filter>
         </defs>
-        <circle cx="32" cy="32" r="30" stroke="url(#logoGradient)" strokeWidth="2.5" fill="url(#glow)" />
-        <path d="M24 38c4 6 12 6 16 0 3-4 2-10-2-13-3-2-5-2-6-1-1-1-3-1-6 1-4 3-5 9-2 13Z" stroke="url(#logoGradient)" strokeWidth="2.5" strokeLinecap="round" strokeLinejoin="round" fill="none" />
-        <path d="M20 44l10-3 10-21c.4-.9-.5-1.8-1.4-1.4L18 29l-3 11c-.3 1 .7 2 1.7 1.7L20 44Z" fill="url(#logoGradient)" opacity="0.9" />
-        <path d="M28 30l6 6" stroke="#fff" strokeWidth="2" strokeLinecap="round" />
+        
+        {/* Outer glow circle */}
+        <circle cx="32" cy="32" r="28" fill="url(#glow)" opacity="0.6" />
+        
+        {/* Main circle border with gradient */}
+        <circle cx="32" cy="32" r="26" stroke="url(#logoGradient)" strokeWidth="2.5" fill="none" filter="url(#logoGlow)" />
+        
+        {/* Brain/emotion symbol */}
+        <path d="M24 38c4 6 12 6 16 0 3-4 2-10-2-13-3-2-5-2-6-1-1-1-3-1-6 1-4 3-5 9-2 13Z" 
+              stroke="url(#logoGradient)" 
+              strokeWidth="2.5" 
+              strokeLinecap="round" 
+              strokeLinejoin="round" 
+              fill="none" 
+              opacity="0.9" />
+        
+        {/* Pen/writing symbol */}
+        <path d="M20 44l10-3 10-21c.4-.9-.5-1.8-1.4-1.4L18 29l-3 11c-.3 1 .7 2 1.7 1.7L20 44Z" 
+              fill="url(#logoGradient)" 
+              opacity="0.85" />
+        
+        {/* Sparkle/insight line */}
+        <path d="M28 30l6 6" 
+              stroke="rgba(255,255,255,0.9)" 
+              strokeWidth="2.5" 
+              strokeLinecap="round" 
+              filter="url(#logoGlow)" />
+        
+        {/* Small sparkle dots */}
+        <circle cx="22" cy="26" r="1.5" fill="#f093fb" opacity="0.8" />
+        <circle cx="42" cy="22" r="1" fill="#667eea" opacity="0.8" />
+        <circle cx="38" cy="42" r="1.2" fill="#ec4899" opacity="0.8" />
     </svg>
 );
 

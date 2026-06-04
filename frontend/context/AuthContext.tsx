@@ -60,7 +60,6 @@ export const AuthProvider: React.FC<{ children: React.ReactNode }> = ({ children
   const register = useCallback(async (name: string, email: string, password: string): Promise<void> => {
     try {
       await api.register(name, email, password);
-      // After registration, log in
       await login(email, password);
     } catch (err: any) {
       throw new Error(err.response?.data?.message || 'Registration failed');

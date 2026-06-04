@@ -90,3 +90,25 @@ export const purgeCommunityPosts = async (token: string, purgeKey: string) => {
   const res = await axios.delete(`${API_URL}/community`, { headers: { Authorization: `Bearer ${token}`, 'x-purge-key': purgeKey }});
   return res.data;
 };
+
+// AI Therapist Chat
+export const chatWithTherapist = async (token: string, data: { message: string; conversationId: string }) => {
+  const res = await axios.post(`${API_URL}/therapist/chat`, data, {
+    headers: { Authorization: `Bearer ${token}` },
+  });
+  return res.data;
+};
+
+export const generateDiaryFromChat = async (token: string, conversationId: string) => {
+  const res = await axios.post(`${API_URL}/therapist/generate-entry`, { conversationId }, {
+    headers: { Authorization: `Bearer ${token}` },
+  });
+  return res.data;
+};
+
+export const getTherapistHistory = async (token: string, conversationId: string) => {
+  const res = await axios.get(`${API_URL}/therapist/history?conversationId=${conversationId}`, {
+    headers: { Authorization: `Bearer ${token}` },
+  });
+  return res.data;
+};
